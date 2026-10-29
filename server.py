@@ -1,5 +1,8 @@
 """
 Flask server for the Emotion Detection application.
+
+Exposes a web UI and an API endpoint that uses the Watson NLP library
+to detect emotions in user-supplied text.
 """
 
 from flask import Flask, render_template, request
@@ -10,7 +13,11 @@ app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def emotion_detector_route():
-    """Analyse text and return formatted emotion results."""
+    """
+    Analyse the text received via the 'textToAnalyze' query parameter
+    and return a formatted string with emotion scores and the
+    dominant emotion.
+    """
     text_to_analyze = request.args.get('textToAnalyze')
 
     response = emotion_detector(text_to_analyze)
